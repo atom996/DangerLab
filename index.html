@@ -53,11 +53,21 @@
          <h2>{{date}}</h2>
          <p>{{description}}</p>
          <ul>
+           <li onclick="fileOnePartTwo()"> >Next </li>
            <li onclick="accessFiles()"> >Back </li>
          </ul>
        </div>
     </script>
 
+    <script id="reportDisplayOnePartTwo" type="text/x-handlebars-template">
+       <div>
+         <h2>{{date}}</h2>
+         <p>{{description}}</p>
+         <ul>
+           <li onclick="accessFiles()"> >Back </li>
+         </ul>
+       </div>
+    </script>
     <!--Handlebars Scripts End -->
   </body>
 </html>

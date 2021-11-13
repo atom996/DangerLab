@@ -75,8 +75,14 @@ function showFiles() {
 }
 
 function selectFileOne() {
-  var description = "Employee performance has been...strange, to say the least. Sudden jerks and spasms, blank expressions, shuffling instead of walking, clear lack of awareness for one's surroundings. Not only that, but a foul odor filled the office area, like that of rotten eggs and gym socks. I've notified the authorities and gotten into contact with the higher-ups. We will get to the bottom of this. First, we will contact the scientists at the laboratory."
+  var description = "Employee performance has been...strange, to say the least. Sudden jerks and spasms, blank expressions, shuffling instead of walking, clear lack of awareness for one's surroundings. Not only that, but a foul odor filled the office area, like that of rotten eggs and gym socks. I've notified the authorities and gotten into contact with the higher-ups. We will get to the bottom of this. First, we will contact the scientists at the laboratory.";
   renderFileDisplay("#reportDisplay","March 23, 2049",description);
+  console.log("selectFile");
+}
+
+function fileOnePartTwo() {
+  var description = "I will be gone for the time being, but if anyone needs to access the security cameras for some reason, the code is 4403."
+  renderFileDisplayOnePartTwo("#reportDisplayOnePartTwo","March 23, 2049",description);
   console.log("selectFile");
 }
 
@@ -119,6 +125,21 @@ var renderTerminalInput = (view_id) => {
 }
 
 var renderFileDisplay = (view_id, date, description) => {
+
+  console.log("Rendering terminal...");
+
+  var source = document.querySelector(view_id).innerHTML;
+
+  var template = Handlebars.compile(source);
+
+  var html = template({'date' : date, 'description' : description});
+
+  document.querySelector("#view_widget").innerHTML = html;
+  document.querySelector("#input_widget").innerHTML = "";
+
+}
+
+var renderFileDisplayOnePartTwo = (view_id, date, description) => {
 
   console.log("Rendering terminal...");
 
