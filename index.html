@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- handlebars library -->
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <link rel="stylesheet" href="terminalStyle.css">
+    <!--Google VT323 font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <script src="terminalFunction.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <meta charset="utf-8"/>
+  </head>
+  <body>
+    <div id="screen">
+      <img src="scanlines.png" id="scan">
+      <img src="bezel.png" id="bezel">
+      <div id="content" class="noselect">
+        <h1>Speci-fi Systems, Inc.</h1>
+        <!--View Widget for Rendering-->
+        <div id="view_widget">
+        </div>
+        <!--View Widget for Input-->
+        <div id="input_widget">
+        </div>
+
+        <h1 id="errorText"></h2>
+      </div>
+    </div>
+    <!--Handlebars Scripts for Templating-->
+
+    <script id="terminalInput" type="text/x-handlebars-template">
+       <div>
+         <form>
+           <label for="usrInput">desk03@specfiOS:~$</label>
+           <input type="text" size="20" maxlength="20" id="usrInput">
+         </form>
+       </div>
+    </script>
+
+    <script id="listTwoInput" type="text/x-handlebars-template">
+       <div>
+         <ul>
+           <li onclick="errorFunc()"> >{{ChoiceOne}}</li>
+           <li onclick="accessFiles()"> >{{ChoiceTwo}}</li>
+         </ul>
+       </div>
+    </script>
+
+    <!--Handlebars Scripts End -->
+  </body>
+</html>
