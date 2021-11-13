@@ -34,7 +34,7 @@
        <div>
          <form>
            <label for="usrInput">desk03@specfiOS:~$</label>
-           <input type="text" size="20" maxlength="20" id="usrInput">
+           <input type="text" size="20" maxlength="20" id="usrInput" onkeydown="inputValue()">
          </form>
        </div>
     </script>
@@ -44,6 +44,16 @@
          <ul>
            <li onclick="errorFunc()"> >{{ChoiceOne}}</li>
            <li onclick="accessFiles()"> >{{ChoiceTwo}}</li>
+         </ul>
+       </div>
+    </script>
+
+    <script id="reportDisplay" type="text/x-handlebars-template">
+       <div>
+         <h2>{{date}}</h2>
+         <p>{{description}}</p>
+         <ul>
+           <li onclick="accessFiles()"> >Back </li>
          </ul>
        </div>
     </script>
