@@ -1,9 +1,9 @@
 #screen {
   position: relative;
-  width: 800px;
-  height: 800px;
+  width: 1000px;
+  height: 900px;
   background-color: blue;
-  margin-left: 22%;
+  margin-left: 15%;
   margin-right: 25%;
 }
 
