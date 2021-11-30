@@ -1,10 +1,11 @@
 var text = '';
-var speed = 100;
+var speed = 25;
 var i = 0;
 const fileList = ["Report: 03_23_2049","Note to all Custodians","[File Corrupted]"];
 const fileNum = ["One", "Two","Three"];
 const stages = [true, false, false, false];
 
+//Function that allows the text to be loaded as if it were being typed in real time.
 function loadText() {
   if (i < text.length) {
     document.getElementById("view_widget").innerHTML += text.charAt(i);
@@ -13,6 +14,7 @@ function loadText() {
   }
 }
 
+//Function that checks the camera to make sure that certain events will happen, affecting the way the cameras will operate.
 function cameraCheck() {
   if (stages[2] == true) {
     renderCameras("#cameraTemp");
@@ -23,12 +25,14 @@ function cameraCheck() {
   }
 }
 
+//Event listener for when the content loads as soon as the story starts.
 document.addEventListener("DOMContentLoaded", () => {
   text = "Hello, welcome to the Speci-fi Security Network.";
   loadText();
   renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)");
 });
 
+//Function that uses handlebars to render the user input section of the project.
 function accessFiles() {
   document.getElementById("view_widget").innerHTML="";
   i = 0;
@@ -37,6 +41,7 @@ function accessFiles() {
   renderTerminalInput("#terminalInput");
 }
 
+//Function that reads the user input in the accessFiles() portion of the story.
 function inputValue() {
   document.getElementById("usrInput")
       .addEventListener("keydown", function(event) {
@@ -79,6 +84,7 @@ function inputValue() {
   });
 }
 
+//Function that will list all of the files present in the listOfFiles array.
 function showFiles() {
   var listOfFiles = [];
   var ulNode = document.createElement('ul');
@@ -95,13 +101,18 @@ function showFiles() {
 
 }
 
+function addFile(textParam) {
+
+}
 //Functions for loading files in the webpage.
+//First portion of the first file
 function selectFileOne() {
   var description = "Employee performance has been...strange, to say the least. Sudden jerks and spasms, blank expressions, shuffling instead of walking, clear lack of awareness for one's surroundings. Not only that, but a foul odor filled the office area, like that of rotten eggs and gym socks. I've notified the authorities and gotten into contact with the higher-ups. We will get to the bottom of this. First, we will contact the scientists at the laboratory.";
   renderFileDisplay("#reportDisplay","March 23, 2049",description);
   console.log("selectFile");
 }
 
+//Second portion of the first file
 function fileOnePartTwo() {
   stages[1] = true;
   var description = "I will be gone for the time being, but if anyone needs to access the security cameras for some reason, the code is 4403."
@@ -109,12 +120,14 @@ function fileOnePartTwo() {
   console.log("selectFile");
 }
 
+//Second file loaded, first portion.
 function selectFileTwo() {
   var description = "Custodians, just a heads up from the Research Department here are Speci-fi, Inc. We've noticed that there has been an odd odor present in our ventilation system, as well as some banging. Whenever you can, would you please have a look and let us know if there's anything unusual? Thank you. Any supplies that you may need are located by the supply cabinet near camera 02.";
   renderFileDisplay("#reportDisplayTwo","March 03, 2049",description);
   console.log("selectFile");
 }
 
+//Third File Loaded. Error if the third stage has not been unlocked.
 function selectFileThree() {
   if(stages[3] == true) {
     var description = "Specimen 37 is a dangerous entity held in facility 10. Not much is known about the appearance of entity 37, besides a pair of eyes, but it is said to very large in size based on the sounds heard in its containment area.";
@@ -126,6 +139,7 @@ function selectFileThree() {
   }
 }
 
+//Second part of the third file.
 function fileThreePartTwo() {
   var description = "Specimen 37 has the ability to manipulate electricity and technology, with a preference for computers. We have managed to contain it thanks to (The rest of the file's text has been corrupted).";
   renderFileDisplay("#reportDisplayThreePartTwo","Specimen 37",description);
@@ -136,6 +150,7 @@ function accessCameraTwo () {
   renderCameras("#cameraTwo");
 }
 
+//What happens when you zoom in on the second camera.
 function zoomTwo() {
   renderCameras("#cameraTwoZoom");
   if (stages[3] == false) {
@@ -155,6 +170,7 @@ function zoomTwo() {
   console.log("zooooooom!");
 }
 
+//Function that returns the user to the main menu.
 function returnToMenu() {
   document.getElementById("view_widget").innerHTML="";
   i = 0;
@@ -163,6 +179,7 @@ function returnToMenu() {
   renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)");
 }
 
+//Specific function that returns the user to the "main menu" immediately after the first encounter with the specimen.
 function returnAfterStare() {
   document.getElementById("view_widget").innerHTML="";
   i = 0;
@@ -171,6 +188,7 @@ function returnAfterStare() {
   renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)");
 }
 
+//Templating done via Handlebars js in order to render the different pages.
 var renderChoiceInput = (view_id, choiceOne, choiceTwo) => {
 
   console.log("Rendering terminal...");
