@@ -74,10 +74,6 @@ function inputValue() {
                   loadText();
                 }
                 case "help":
-                  document.getElementById("view_widget").innerHTML="";
-                  i = 0;
-                  text="Getting help..."
-                  loadText();
                   helpChat();
                   event.preventDefault();
                   break;
