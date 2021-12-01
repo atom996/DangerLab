@@ -73,6 +73,14 @@ function inputValue() {
                   text = "Cameras now accessible!";
                   loadText();
                 }
+                case "help":
+                  document.getElementById("view_widget").innerHTML="";
+                  i = 0;
+                  text="Getting help..."
+                  loadText();
+                  helpChat();
+                  event.preventDefault();
+                  break;
                 event.preventDefault();
                 break;
               default:
@@ -101,8 +109,29 @@ function showFiles() {
 
 }
 
-function addFile(textParam) {
+//Function for showing help chat
+const helpChatList = ["Hello, thank you for accessing the help system. How may I assist you?", "Help", "Type 'ls' in the input to list files. Type 'code <x>'' (x being a number). Type 'back' to return. More commands will be unlocked as you progress.", "Thank you."];
+let countHelp = 0;
+let chatList = [];
+function helpChat() {
+  var ulNode = document.createElement('ul');
+  ulNode.setAttribute('id','ulNodeDefIdHelp');
+  document.getElementById("view_widget").appendChild(ulNode);
 
+  if(countHelp < helpChatList.length){
+    chatList[countHelp] = document.createElement('li');
+    chatList[countHelp].appendChild(document.createTextNode(`${helpChatList[countHelp]}`));
+    chatList[countHelp].setAttribute('id',`helpNode${countHelp}`);
+    if (countHelp%2==0) {
+      chatList[countHelp].setAttribute('style','float: left');
+    } else {
+      chatList[countHelp].setAttribute('style','float: right');
+    }
+    //chatList[x].setAttribute('onclick',`selectFile${fileNum[x]}()`);
+    ulNode.appendChild(chatList[countHelp]);
+    countHelp++;
+    setTimeout(helpChat(), 5000);
+  }
 }
 //Functions for loading files in the webpage.
 //First portion of the first file
@@ -165,6 +194,18 @@ function zoomTwo() {
       returnAfterStare();
     }, 2000);
   } else {
+    var tmpCnt = 0;
+    var tmpTxt = ""
+    document.getElementById("cameraTwoCaption").innerHTML = "";
+    tmpTxt = "It seems to be an ordinary supply closet. Nothing seems out of the ordinary.";
+    const temp = function () {
+      if (tmpCnt < tmpTxt.length) {
+        document.getElementById("cameraTwoCaption").innerHTML += tmpTxt.charAt(tmpCnt);
+        tmpCnt++;
+        setTimeout(temp, speed);
+      }
+    }
+    temp();
     console.log("no");
   }
   console.log("zooooooom!");
