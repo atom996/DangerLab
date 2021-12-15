@@ -3,7 +3,8 @@ var speed = 25;
 var i = 0;
 const fileList = ["Report: 03_23_2049","Note to all Custodians","[File Corrupted]"];
 const fileNum = ["One", "Two","Three"];
-const stages = [true, false, false, false];
+const stages = [true, false, false, false, false];
+const currentStage = [true, false, false, false, false];
 
 //Function that allows the text to be loaded as if it were being typed in real time.
 function loadText() {
@@ -27,17 +28,15 @@ function cameraCheck() {
 
 //Event listener for when the content loads as soon as the story starts.
 document.addEventListener("DOMContentLoaded", () => {
-  /*text = "Hello, welcome to the Speci-fi Security Network.";
-  loadText();
-  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)", "Help");*/
   accessMainMenu();
 });
 
 //Function that uses handlebars to render the user input section of the project.
 function accessFiles() {
+  document.getElementById("screen").style.backgroundColor = "blue";
   document.getElementById("view_widget").innerHTML="";
   i = 0;
-  text = "Accessing files, please enter a command. Refer to the manual for instruction.";
+  text = "Accessing files, please enter a command.";
   loadText();
   renderTerminalInput("#terminalInput");
 }
@@ -70,15 +69,12 @@ function inputValue() {
                 } else {
                   document.getElementById("view_widget").innerHTML="";
                   stages[2] = true;
+                  currentStage[1] = false;
+                  currentStage[2] = true;
                   i = 0;
                   text = "Cameras now accessible!";
                   loadText();
                 }
-                case "help":
-                  document.getElementById("view_widget").innerHTML="";
-                  helpChat();
-                  event.preventDefault();
-                  break;
                 event.preventDefault();
                 break;
               default:
@@ -109,34 +105,35 @@ function showFiles() {
 
 //Function for showing help chat
 
-/*const helpChatList = ["Hello, thank you for accessing the help system. How may I assist you?", "Help", "Type 'ls' in the input to list files. Type 'code <x>'' (x being a number). Type 'back' to return. More commands will be unlocked as you progress.", "Thank you."];
-let countHelp = 0;
-let chatList = [];
 function helpChat() {
-  var ulNode = document.createElement('ul');
-  ulNode.setAttribute('id','ulNodeDefIdHelp');
-  document.getElementById("view_widget").appendChild(ulNode);
-
-  if(countHelp < helpChatList.length){
-    chatList[countHelp] = document.createElement('li');
-    chatList[countHelp].appendChild(document.createTextNode(`${helpChatList[countHelp]}`));
-    chatList[countHelp].setAttribute('id',`helpNode${countHelp}`);
-    if (countHelp%2==0) {
-      chatList[countHelp].setAttribute('style','float: left');
-    } else {
-      chatList[countHelp].setAttribute('style','float: right');
+  if(i == text.length) {
+    if(stages[0] == true && (currentStage[0] == true || currentStage[1] == true)) {
+      renderHelp("#helpScreen","Hello, welcome to the Speci-Fi help screen. For new employees, here are some commands to remember when accessing the file access system. ls (Ls, the L must be lowercase) allows one to list files in the system. Next, we'll be talking about the code function. The code function is written like this: code <x>. When you type the function yourself, you won't be writing the <x>, you'll be substituting that with a number. You'll find these numbers within the files as you progress. Press the back button every time you would like to, well, go back. Also, be sure to frequently check on the files and this help menu for new tips as you progress.");
+    } else if (stages[3] == true && currentStage[3] == true) {
+      document.getElementById("screen").style.backgroundColor = "red";
+      renderHelpDanger("#helpScreenDanger","GIVEUPGIVEUPGIVEUPGIVEUPGIVEUPGIVEUP.");
+      currentStage[3] = false;
+      currentStage[4] = true;
+      stages[4] = true;
+      fileList.push("0______0");
+      fileNum.push("Four");
+      setTimeout(() => {
+        document.getElementById("screen").style.backgroundColor = "blue";
+        returnToMenu();
+      }, 1000);
+    } else if (stages[4] == true && currentStage[4]) {
+      renderHelp("#helpScreen","A new file has been created...");
     }
-    //chatList[x].setAttribute('onclick',`selectFile${fileNum[x]}()`);
-    ulNode.appendChild(chatList[countHelp]);
-    countHelp++;
-    setTimeout(helpChat(), 5000);
   }
-}*/
-
-function helpChat() {
-  renderHelp("#helpScreen","Hello, welcome to the Speci-Fi help screen. For new employees, here are some commands to remember when accessing the file access system. ls (Ls, the L must be lowercase) allows one to list files in the system. Next, we'll be talking about the code function. The code function is written like this: code <x>. When you type the function yourself, you won't be writing the <x>, you'll be substituting that with a number. You'll find these numbers within the files as you progress. Press the back button every time you would like to, well, go back. Also, be sure to frequently check on the files and this help menu for new tips as you progress.");
 }
 
+function nextHelp() {
+  if(stages[0] == true) {
+    renderHelp("#helpScreen","It is imperative to your [DELETED]saftey that you read the files carefully, there could be information there that will allow you to progress. Be sure to do so before... IT is aware of what you're doing...")
+  }
+}
+
+//Function for allowing the event listener to access the main menu.
 function accessMainMenu() {
   text = "Hello, welcome to the Speci-fi Security Network.";
   loadText();
@@ -153,6 +150,8 @@ function selectFileOne() {
 //Second portion of the first file
 function fileOnePartTwo() {
   stages[1] = true;
+  currentStage[0] = false;
+  currentStage[1] = true;
   var description = "I will be gone for the time being, but if anyone needs to access the security cameras for some reason, the code is 4403."
   renderFileDisplayOnePartTwo("#reportDisplayOnePartTwo","March 23, 2049",description);
   console.log("selectFile");
@@ -183,6 +182,14 @@ function fileThreePartTwo() {
   renderFileDisplay("#reportDisplayThreePartTwo","Specimen 37",description);
   console.log("selectFile");
 }
+
+//File 4 after being added
+function selectFileFour(){
+  document.getElementById("screen").style.backgroundColor = "red";
+  var description = "The reason why you haven't stopped me yet is because you have not activated the ((v en t i lati on)). Maybe try close vent. Maybe get it done in ((t en sec onds)).";
+  renderFileFour("#reportDisplayFour",description);
+  console.log("fileFour");
+}
 //Camera Functions
 function accessCameraTwo () {
   renderCameras("#cameraTwo");
@@ -193,6 +200,8 @@ function zoomTwo() {
   renderCameras("#cameraTwoZoom");
   if (stages[3] == false) {
     stages[3] = true;
+    currentStage[2] = false;
+    currentStage[3] = true;
     document.getElementById("cameraTwoImageZoom").src = "eyes.jpg";
     document.getElementById("screen").style.backgroundColor = "red";
     document.getElementById("systemHead").innerHTML = "I SEE YOU";
@@ -201,7 +210,7 @@ function zoomTwo() {
       document.getElementById("systemHead").innerHTML = "Speci-fi Systems, Inc.";
       fileList[2] = "Specimen 37";
       returnAfterStare();
-    }, 2000);
+    }, 1000);
   } else {
     var tmpCnt = 0;
     var tmpTxt = ""
@@ -222,6 +231,7 @@ function zoomTwo() {
 
 //Function that returns the user to the main menu.
 function returnToMenu() {
+  document.getElementById("screen").style.backgroundColor = "blue";
   document.getElementById("view_widget").innerHTML="";
   i = 0;
   text = "Hello, welcome to the Speci-fi Security Network.";
@@ -294,6 +304,36 @@ var renderHelp = (view_id, helpMessageInput) => {
   var template = Handlebars.compile(source);
 
   var html = template({'helpMessage' : helpMessageInput});
+
+  document.querySelector("#view_widget").innerHTML = html;
+  document.querySelector("#input_widget").innerHTML = "";
+
+}
+
+var renderHelpDanger = (view_id, helpMessageInput) => {
+
+  console.log("Rendering terminal...");
+
+  var source = document.querySelector(view_id).innerHTML;
+
+  var template = Handlebars.compile(source);
+
+  var html = template({'helpMessage' : helpMessageInput});
+
+  document.querySelector("#view_widget").innerHTML = html;
+  document.querySelector("#input_widget").innerHTML = "";
+
+}
+
+var renderFileFour = (view_id, description) => {
+
+  console.log("Rendering terminal...");
+
+  var source = document.querySelector(view_id).innerHTML;
+
+  var template = Handlebars.compile(source);
+
+  var html = template({'description' : description});
 
   document.querySelector("#view_widget").innerHTML = html;
   document.querySelector("#input_widget").innerHTML = "";

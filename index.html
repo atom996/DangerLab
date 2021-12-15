@@ -61,6 +61,16 @@
        </div>
     </script>
 
+    <script id="helpScreenDanger" type="text/x-handlebars-template">
+       <div>
+         <p>{{helpMessage}}</p>
+         <ul>
+           <li> >NO </li>
+           <li> >ESCAPE </li>
+         </ul>
+       </div>
+    </script>
+
     <script id="listTwoInput" type="text/x-handlebars-template">
        <div>
          <ul>
@@ -123,6 +133,16 @@
        </div>
     </script>
 
+    <script id="reportDisplayFour" type="text/x-handlebars-template">
+       <div>
+         <h2>{{date}}</h2>
+         <p>{{description}}</p>
+         <ul>
+           <li onclick="accessFiles()"> >Back </li>
+         </ul>
+       </div>
+    </script>
+
     <script id="cameraTemp" type="text/x-handlebars-template">
        <div>
          <ul>
@@ -149,7 +169,6 @@
          <ul>
            <img src="closet.png" style="text-align: center;"id="cameraTwoImageZoom">
            <li id="cameraTwoCaption"></li>
-           <li onclick="returnToMenu()"> >Back </li>
          </ul>
        </div>
     </script>
