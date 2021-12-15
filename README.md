@@ -1,4 +1,11 @@
 # DangerLab
+// PLEASE READ //
+Interactive Story Project for Professor Fontanilla.
+The tutorial that I used, for anyone wondering, to make the whole terminal appearance is the one by Niklas Ziermann on YouTube https://www.youtube.com/watch?v=8MXA07BZLqo
+Credit for the base design used for this project goes to him
+I will eventually be creating an entirely new terminal design for this project down the line, but for the sake of this project I used this as it was the most appealing. Check out the video!
+/////////////////
+
 Hello Speci-fi Employee, and welcome to the rest of your life!
 You are reading this because you are smart and know what to do in order to please the higher-ups!
 To get you started here are some very basic commands within our special OS:

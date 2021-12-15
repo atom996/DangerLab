@@ -27,9 +27,10 @@ function cameraCheck() {
 
 //Event listener for when the content loads as soon as the story starts.
 document.addEventListener("DOMContentLoaded", () => {
-  text = "Hello, welcome to the Speci-fi Security Network.";
+  /*text = "Hello, welcome to the Speci-fi Security Network.";
   loadText();
-  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)");
+  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)", "Help");*/
+  accessMainMenu();
 });
 
 //Function that uses handlebars to render the user input section of the project.
@@ -74,6 +75,7 @@ function inputValue() {
                   loadText();
                 }
                 case "help":
+                  document.getElementById("view_widget").innerHTML="";
                   helpChat();
                   event.preventDefault();
                   break;
@@ -106,7 +108,8 @@ function showFiles() {
 }
 
 //Function for showing help chat
-const helpChatList = ["Hello, thank you for accessing the help system. How may I assist you?", "Help", "Type 'ls' in the input to list files. Type 'code <x>'' (x being a number). Type 'back' to return. More commands will be unlocked as you progress.", "Thank you."];
+
+/*const helpChatList = ["Hello, thank you for accessing the help system. How may I assist you?", "Help", "Type 'ls' in the input to list files. Type 'code <x>'' (x being a number). Type 'back' to return. More commands will be unlocked as you progress.", "Thank you."];
 let countHelp = 0;
 let chatList = [];
 function helpChat() {
@@ -128,6 +131,16 @@ function helpChat() {
     countHelp++;
     setTimeout(helpChat(), 5000);
   }
+}*/
+
+function helpChat() {
+  renderHelp("#helpScreen","Hello, welcome to the Speci-Fi help screen. For new employees, here are some commands to remember when accessing the file access system. ls (Ls, the L must be lowercase) allows one to list files in the system. Next, we'll be talking about the code function. The code function is written like this: code <x>. When you type the function yourself, you won't be writing the <x>, you'll be substituting that with a number. You'll find these numbers within the files as you progress. Press the back button every time you would like to, well, go back. Also, be sure to frequently check on the files and this help menu for new tips as you progress.");
+}
+
+function accessMainMenu() {
+  text = "Hello, welcome to the Speci-fi Security Network.";
+  loadText();
+  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)", "Help");
 }
 //Functions for loading files in the webpage.
 //First portion of the first file
@@ -213,7 +226,7 @@ function returnToMenu() {
   i = 0;
   text = "Hello, welcome to the Speci-fi Security Network.";
   loadText();
-  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)");
+  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)","Help");
 }
 
 //Specific function that returns the user to the "main menu" immediately after the first encounter with the specimen.
@@ -222,11 +235,11 @@ function returnAfterStare() {
   i = 0;
   text = "Hello, welcome to the Speci-fi Security Network, a new file had been added (It knows where I am).";
   loadText();
-  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)");
+  renderChoiceInput("#listTwoInput","Access Cameras","Access File(s)", "Help");
 }
 
 //Templating done via Handlebars js in order to render the different pages.
-var renderChoiceInput = (view_id, choiceOne, choiceTwo) => {
+var renderChoiceInput = (view_id, choiceOne, choiceTwo, choiceThree) => {
 
   console.log("Rendering terminal...");
 
@@ -234,7 +247,7 @@ var renderChoiceInput = (view_id, choiceOne, choiceTwo) => {
 
   var template = Handlebars.compile(source);
 
-  var html = template({'ChoiceOne' : choiceOne, 'ChoiceTwo' : choiceTwo});
+  var html = template({'ChoiceOne' : choiceOne, 'ChoiceTwo' : choiceTwo, 'ChoiceThree' : choiceThree});
 
   document.querySelector("#input_widget").innerHTML = html;
 
@@ -265,6 +278,22 @@ var renderFileDisplay = (view_id, date, description) => {
   var template = Handlebars.compile(source);
 
   var html = template({'date' : date, 'description' : description});
+
+  document.querySelector("#view_widget").innerHTML = html;
+  document.querySelector("#input_widget").innerHTML = "";
+
+}
+
+//Rendering the help chat in the different stages.
+var renderHelp = (view_id, helpMessageInput) => {
+
+  console.log("Rendering terminal...");
+
+  var source = document.querySelector(view_id).innerHTML;
+
+  var template = Handlebars.compile(source);
+
+  var html = template({'helpMessage' : helpMessageInput});
 
   document.querySelector("#view_widget").innerHTML = html;
   document.querySelector("#input_widget").innerHTML = "";

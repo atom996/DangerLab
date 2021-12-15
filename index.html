@@ -36,9 +36,28 @@
            <label for="usrInput">desk03@specfiOS:~$</label>
            <input type="text" size="20" maxlength="20" id="usrInput" onkeydown="inputValue()">
            <ul>
-             <li onclick="helpChat()">Help</button>
+             <li onclick="returnToMenu()"> >Back </button>
            </ul>
          </form>
+       </div>
+    </script>
+
+    <script id="helpScreen" type="text/x-handlebars-template">
+       <div>
+         <p>{{helpMessage}}</p>
+         <ul>
+           <li onclick="nextHelp()"> >Next </li>
+           <li onclick="returnToMenu()"> >Back </li>
+         </ul>
+       </div>
+    </script>
+
+    <script id="finalHelpScreen" type="text/x-handlebars-template">
+       <div>
+         <p>{{helpMessage}}</p>
+         <ul>
+           <li onclick="accessMainMenu()"> >Back </li>
+         </ul>
        </div>
     </script>
 
@@ -47,6 +66,7 @@
          <ul>
            <li onclick="cameraCheck()"> >{{ChoiceOne}}</li>
            <li onclick="accessFiles()"> >{{ChoiceTwo}}</li>
+           <li onclick="helpChat()"> >{{ChoiceThree}}</li>
          </ul>
        </div>
     </script>
